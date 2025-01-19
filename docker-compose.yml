@@ -1,0 +1,20 @@
+services:
+  blogs-cms-postgres:
+    container_name: blogs-cms-postgres
+    image: "postgres:latest"
+    ports:
+      - "5433:5432"
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: blogs-strapi
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - blog-cms:/var/lib/postgresql/data/
+
+volumes:
+  blog-cms:
